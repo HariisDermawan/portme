@@ -12,14 +12,14 @@
     },
     "dependencies": {
         "@inertiajs/react": "^3.0.0",
-        "@inertiajs/vite": "^3.0.1",
+        "@inertiajs/vite": "^3.11.0",
         "@tailwindcss/vite": "^4.3.5",
         "@types/react": "^19.2.0",
         "@types/react-dom": "^19.2.0",
-        "@vitejs/plugin-react": "^5.2.0",
+        "@vitejs/plugin-react": "^6.1.1",
         "clsx": "^2.1.1",
         "concurrently": "^10.0.3",
-        "laravel-vite-plugin": "^0.2.4",
+        "laravel-vite-plugin": "^3.1",
         "lucide-react": "^1.73.0",
         "react": "^19.3.1",
         "react-dom": "^19.3.1",
@@ -32,8 +32,10 @@
     },
     "devDependencies": {
         "@laravel/vite-plugin-wayfinder": "^0.1.3",
+        "@rolldown/plugin-babel": "^0.2.3",
         "@types/node": "^22.13.5",
-        "babel-plugin-react-compiler": "^1.0.0"
+        "babel-plugin-react-compiler": "^1.0.0",
+        "vite-plus": "1.4.0"
     },
     "optionalDependencies": {
         "@laravel/multiplex": "^0.4.1",
@@ -42,7 +44,6 @@
         "lightningcss-linux-x64-gnu": "^1.29.1"
     },
     "overrides": {
-        "tinypool": "2.1.2",
         "vite": "npm:@voidzero-dev/vite-plus-core@1.4.0"
     }
 }
