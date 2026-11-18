@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/react';
 import { FaFolderOpen, FaPlus } from 'react-icons/fa6';
+import ProjectThumbnail from '@/components/ProjectThumbnail';
 import admin from '@/routes/admin';
 import AdminLayout from '../components/AdminLayout';
 import {
@@ -43,21 +44,11 @@ export default function ProjectsIndex({ projects }: { projects: Project[] }) {
                             >
                                 <div className="flex min-w-0 items-center gap-4">
                                     <div className="h-16 w-24 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-[#191919]">
-                                        {project.thumbnail ? (
-                                            <img
-                                                src={project.thumbnail}
-                                                alt={project.title}
-                                                className="h-full w-full object-cover object-top"
-                                            />
-                                        ) : (
-                                            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-orange-500/20 via-[#191919] to-[#191919]">
-                                                <span className="text-lg font-extrabold text-orange-500/70">
-                                                    {project.title
-                                                        .charAt(0)
-                                                        .toUpperCase()}
-                                                </span>
-                                            </div>
-                                        )}
+                                        <ProjectThumbnail
+                                            project={project}
+                                            imageClassName="object-top"
+                                            titleClassName="text-lg"
+                                        />
                                     </div>
 
                                     <div className="min-w-0">

@@ -23,9 +23,8 @@ const valuesFrom = (education?: Education): EducationForm => ({
     institution: education?.institution ?? '',
     degree: education?.degree ?? '',
     major: education?.major ?? '',
-    start_year:
-        education?.start_year !== null ? String(education?.start_year) : '',
-    end_year: education?.end_year !== null ? String(education?.end_year) : '',
+    start_year: String(education?.start_year ?? ''),
+    end_year: String(education?.end_year ?? ''),
     description: education?.description ?? '',
 });
 

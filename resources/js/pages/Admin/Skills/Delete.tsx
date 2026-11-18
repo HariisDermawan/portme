@@ -1,62 +1,24 @@
-import { Link, router } from '@inertiajs/react';
-import { FaTriangleExclamation } from 'react-icons/fa6';
 import admin from '@/routes/admin';
-import AdminLayout from '../components/AdminLayout';
-import { PageHeader, dangerButton, secondaryButton } from '../components/ui';
+import DeletePage from '../components/DeletePage';
 import type { Skill } from '../types';
 
 export default function SkillsDelete({ skill }: { skill: Skill }) {
-    const remove = () => {
-        router.delete(admin.skills.destroy.url(skill.id), {
-            preserveScroll: true,
-        });
-    };
-
     return (
-        <AdminLayout active="skills">
-            <div className="mx-auto max-w-xl">
-                <PageHeader
-                    title="Delete Skill"
-                    description="Konfirmasi penghapusan skill."
-                />
-
-                <div className="mt-6 rounded-2xl border border-red-500/20 bg-[#111111] p-6">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-full border border-red-500/30 bg-red-500/10 text-red-400">
-                        <FaTriangleExclamation size={16} />
-                    </span>
-
-                    <h3 className="mt-4 text-base font-bold text-white">
-                        Hapus skill "{skill.name}"?
-                    </h3>
-                    <p className="mt-1 text-sm leading-6 text-gray-500">
-                        Skill ini akan dihapus permanen. Tindakan ini tidak bisa
-                        dibatalkan.
-                    </p>
-
-                    <div className="mt-5 rounded-xl border border-white/5 bg-white/[0.02] p-3 text-xs">
-                        <p className="font-semibold text-white">{skill.name}</p>
-                        <p className="mt-0.5 text-gray-500">
-                            {skill.category} · {skill.proficiency ?? 0}%
-                        </p>
-                    </div>
-
-                    <div className="mt-6 flex items-center justify-end gap-2">
-                        <Link
-                            href={admin.skills.index.url()}
-                            className={secondaryButton}
-                        >
-                            Cancel
-                        </Link>
-                        <button
-                            type="button"
-                            onClick={remove}
-                            className={dangerButton}
-                        >
-                            Delete Skill
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </AdminLayout>
+        <DeletePage
+            active="skills"
+            title="Delete Skill"
+            description="Konfirmasi penghapusan skill."
+            heading={`Hapus skill "${skill.name}"?`}
+            warning="Skill ini akan dihapus permanen. Tindakan ini tidak bisa dibatalkan."
+            cancelHref={admin.skills.index.url()}
+            deleteUrl={admin.skills.destroy.url(skill.id)}
+            deleteLabel="Delete Skill"
+            details={
+                <>
+                    <p className="font-semibold text-white">{skill.name}</p>
+                    <p className="mt-0.5 text-gray-500">{skill.category}</p>
+                </>
+            }
+        />
     );
 }

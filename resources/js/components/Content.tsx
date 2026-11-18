@@ -2,31 +2,12 @@ import type { CSSProperties } from 'react';
 import { FaArrowUpRightFromSquare, FaGithub } from 'react-icons/fa6';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import ProjectThumbnail from '@/components/ProjectThumbnail';
 import Reveal from '@/components/Reveal';
 import type { PublicProject } from '@/types/public';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
-function ProjectThumbnail({ project }: { project: PublicProject }) {
-    if (project.thumbnail) {
-        return (
-            <img
-                src={project.thumbnail}
-                alt={project.title}
-                className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-            />
-        );
-    }
-
-    return (
-        <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-orange-500/20 via-[#191919] to-[#191919]">
-            <span className="text-4xl font-extrabold text-orange-500/70">
-                {project.title.charAt(0).toUpperCase()}
-            </span>
-        </div>
-    );
-}
 
 const swiperStyle = {
     '--swiper-navigation-color': '#f97316',

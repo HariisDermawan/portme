@@ -32,18 +32,6 @@ class ActivityLogController extends Controller
 
         return Inertia::render('Admin/ActivityLog/Index', [
             'logs' => $logs,
-            'stats' => [
-                'today' => ActivityLog::query()->whereDate('visited_at', today())->count(),
-                'uniqueVisitorsToday' => ActivityLog::query()
-                    ->whereDate('visited_at', today())
-                    ->distinct('ip_address')
-                    ->count('ip_address'),
-                'onlineNow' => ActivityLog::query()
-                    ->where('visited_at', '>=', now()->subMinutes(5))
-                    ->distinct('ip_address')
-                    ->count('ip_address'),
-                'total' => ActivityLog::query()->count(),
-            ],
         ]);
     }
 

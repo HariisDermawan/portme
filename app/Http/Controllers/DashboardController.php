@@ -14,21 +14,6 @@ class DashboardController extends Controller
 {
     public function index(): Response
     {
-        $projects = Project::query()
-            ->orderByDesc('created_at')
-            ->get([
-                'id',
-                'title',
-                'slug',
-                'category',
-                'thumbnail',
-                'description',
-                'technologies',
-                'demo_url',
-                'github_url',
-                'created_at',
-            ]);
-
         return Inertia::render('Admin/Dashboard/Index', [
             'stats' => [
                 'projects' => Project::query()->count(),
@@ -42,7 +27,10 @@ class DashboardController extends Controller
                 ->latest()
                 ->take(6)
                 ->get(['id', 'name', 'email', 'subject', 'message', 'is_read', 'read_at', 'created_at']),
-            'recentProjects' => $projects->take(5)->values(),
+            'recentProjects' => Project::query()
+                ->latest()
+                ->take(5)
+                ->get(['id', 'title', 'slug', 'category', 'created_at']),
         ]);
     }
 }

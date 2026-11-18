@@ -1,8 +1,5 @@
-import { Link } from '@inertiajs/react';
-import { FaArrowLeft } from 'react-icons/fa6';
 import admin from '@/routes/admin';
-import AdminLayout from '../components/AdminLayout';
-import { PageHeader, secondaryButton } from '../components/ui';
+import FormPage from '../components/FormPage';
 import type { Experience } from '../types';
 import ExperienceForm from './Form';
 
@@ -12,26 +9,14 @@ export default function ExperienceEdit({
     experience: Experience;
 }) {
     return (
-        <AdminLayout active="experience">
-            <div className="mx-auto max-w-3xl">
-                <PageHeader
-                    title="Edit Experience"
-                    description={`Perbarui pengalaman di "${experience.company}".`}
-                    action={
-                        <Link
-                            href={admin.experiences.index.url()}
-                            className={secondaryButton}
-                        >
-                            <FaArrowLeft size={11} />
-                            Back to Experience
-                        </Link>
-                    }
-                />
-
-                <div className="mt-6 rounded-2xl border border-white/10 bg-[#111111] p-5">
-                    <ExperienceForm experience={experience} />
-                </div>
-            </div>
-        </AdminLayout>
+        <FormPage
+            active="experience"
+            title="Edit Experience"
+            description={`Perbarui pengalaman di "${experience.company}".`}
+            backHref={admin.experiences.index.url()}
+            backLabel="Back to Experience"
+        >
+            <ExperienceForm experience={experience} />
+        </FormPage>
     );
 }

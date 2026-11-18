@@ -1,4 +1,5 @@
 import type { IconType } from 'react-icons';
+import BackgroundDots from '@/components/BackgroundDots';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import Reveal from '@/components/Reveal';
@@ -119,37 +120,10 @@ export default function AboutSection({
                 <section className="relative overflow-hidden px-6 pt-8 pb-20 md:px-8 md:py-28">
                     <div className="pointer-events-none absolute top-20 -right-32 hidden h-80 w-80 rounded-full bg-orange-500/10 blur-[120px] md:block" />
 
-                    <div className="pointer-events-none absolute top-0 -right-24 h-[420px] w-[420px] opacity-35 sm:-right-10 sm:h-[550px] sm:w-[550px] md:right-0 md:h-[650px] md:w-[650px] md:opacity-70">
-                        <div
-                            className="absolute inset-0 md:hidden"
-                            style={{
-                                backgroundImage:
-                                    'radial-gradient(circle, rgba(249,115,22,0.4) 1.4px, transparent 1.5px)',
-                                backgroundSize: '16px 16px',
-                                clipPath:
-                                    'path("M 650 0 L 650 650 C 500 620 420 550 330 430 C 240 310 130 220 0 200 L 0 0 Z")',
-                                maskImage:
-                                    'linear-gradient(to left, black 0%, black 65%, transparent 100%)',
-                                WebkitMaskImage:
-                                    'linear-gradient(to left, black 0%, black 65%, transparent 100%)',
-                            }}
-                        />
-
-                        <div
-                            className="absolute inset-0 hidden md:block"
-                            style={{
-                                backgroundImage:
-                                    'radial-gradient(circle, rgba(249,115,22,0.85) 1.4px, transparent 1.5px)',
-                                backgroundSize: '16px 16px',
-                                clipPath:
-                                    'path("M 650 0 L 650 650 C 500 620 420 550 330 430 C 240 310 130 220 0 200 L 0 0 Z")',
-                                maskImage:
-                                    'linear-gradient(to left, black 0%, black 65%, transparent 100%)',
-                                WebkitMaskImage:
-                                    'linear-gradient(to left, black 0%, black 65%, transparent 100%)',
-                            }}
-                        />
-                    </div>
+                    <BackgroundDots
+                        compact
+                        className="h-[420px] w-[420px] opacity-35 sm:-right-10 sm:h-[550px] sm:w-[550px] md:right-0 md:h-[650px] md:w-[650px] md:opacity-70"
+                    />
 
                     <div className="relative z-10 mx-auto max-w-7xl">
                         <Reveal className="mb-14 md:mb-16">

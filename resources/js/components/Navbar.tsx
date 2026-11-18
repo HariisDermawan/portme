@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { usePage } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { FaHouse, FaUser, FaFolderOpen, FaEnvelope } from 'react-icons/fa6';
 import type { PublicProfile } from '@/types/public';
 
@@ -34,20 +34,20 @@ export default function Navbar({
         <>
             <header className="fixed top-0 left-0 z-50 w-full bg-[#0b0b0b]/90 backdrop-blur-xl">
                 <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:px-8 md:py-7">
-                    <a
+                    <Link
                         href="/"
                         className="font-heading text-2xl font-bold tracking-tight text-white"
                     >
                         {brand}
                         <span className="text-orange-500">.</span>
-                    </a>
+                    </Link>
 
                     <div className="hidden items-center gap-8 md:flex">
                         {navItems.map((item) => {
                             const isActive = url === item.href;
 
                             return (
-                                <a
+                                <Link
                                     key={item.label}
                                     href={item.href}
                                     className={`relative text-[15px] font-semibold transition-colors duration-300 hover:text-orange-500 ${
@@ -57,24 +57,24 @@ export default function Navbar({
                                     }`}
                                 >
                                     {item.label}
-                                </a>
+                                </Link>
                             );
                         })}
                     </div>
 
-                    <a
+                    <Link
                         href={isAuthenticated ? '/dashboard' : '/login'}
                         className="hidden rounded-lg border border-orange-500 px-6 py-2.5 text-sm font-semibold text-orange-500 transition-all duration-300 hover:bg-orange-500 hover:text-white md:block"
                     >
                         {isAuthenticated ? 'Dashboard' : 'Login'}
-                    </a>
+                    </Link>
 
-                    <a
+                    <Link
                         href={isAuthenticated ? '/dashboard' : '/login'}
                         className="rounded-lg border border-orange-500 px-4 py-2 text-xs font-semibold text-orange-500 transition-all duration-300 hover:bg-orange-500 hover:text-white md:hidden"
                     >
                         {isAuthenticated ? 'Dashboard' : 'Login'}
-                    </a>
+                    </Link>
                 </nav>
             </header>
 
@@ -90,7 +90,7 @@ export default function Navbar({
                         const isActive = url === item.href;
 
                         return (
-                            <a
+                            <Link
                                 key={item.label}
                                 href={item.href}
                                 className={`flex flex-col items-center justify-center gap-1 rounded-lg py-2 transition-all duration-300 ${
@@ -104,7 +104,7 @@ export default function Navbar({
                                 <span className="text-[10px] font-semibold">
                                     {item.label}
                                 </span>
-                            </a>
+                            </Link>
                         );
                     })}
                 </div>

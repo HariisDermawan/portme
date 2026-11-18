@@ -103,7 +103,7 @@ class ProjectController extends Controller
         }
 
         $validated['slug'] = $this->uniqueSlug(
-            (string) ($validated['slug'] ?? $validated['title']),
+            (string) (($validated['slug'] ?? '') ?: $validated['title']),
             $project,
         );
 

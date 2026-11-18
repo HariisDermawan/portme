@@ -1,6 +1,7 @@
 import { Link, useForm } from '@inertiajs/react';
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { FaLayerGroup, FaPlus, FaUpload } from 'react-icons/fa6';
+import { compressImage } from '@/lib/compressImage';
 import admin from '@/routes/admin';
 import AdminLayout from '../components/AdminLayout';
 import {
@@ -18,66 +19,6 @@ type AboutForm = {
     short_description: string;
     about_photo: File | null;
 };
-
-async function compressImage(
-    file: File,
-    maxDimension = 1200,
-    quality = 0.8,
-): Promise<File> {
-    if (!file.type.startsWith('image/')) {
-        return file;
-    }
-
-    try {
-        const bitmap = await createImageBitmap(file);
-        const scale = Math.min(
-            1,
-            maxDimension / Math.max(bitmap.width, bitmap.height),
-        );
-        const canvas = document.createElement('canvas');
-        canvas.width = Math.max(1, Math.round(bitmap.width * scale));
-        canvas.height = Math.max(1, Math.round(bitmap.height * scale));
-
-        const context = canvas.getContext('2d');
-
-        if (!context) {
-            return file;
-        }
-
-        context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-        bitmap.close();
-
-        const outputType =
-            file.type === 'image/png' || file.type === 'image/webp'
-                ? file.type
-                : 'image/jpeg';
-        const extension =
-            outputType === 'image/png'
-                ? 'png'
-                : outputType === 'image/webp'
-                  ? 'webp'
-                  : 'jpg';
-
-        const blob = await new Promise<Blob | null>((resolve) => {
-            canvas.toBlob(resolve, outputType, quality);
-        });
-
-        if (!blob || blob.size >= file.size) {
-            return file;
-        }
-
-        return new File(
-            [blob],
-            `${file.name.replace(/\.[^./\\]+$/, '')}.${extension}`,
-            {
-                type: outputType,
-                lastModified: Date.now(),
-            },
-        );
-    } catch {
-        return file;
-    }
-}
 
 export default function SkillsIndex({
     skills,
@@ -103,7 +44,7 @@ export default function SkillsIndex({
             return;
         }
 
-        const compressed = await compressImage(file);
+        const compressed = await compressImage(file, 1200);
         form.setData('about_photo', compressed);
         setAboutPhotoPreview(URL.createObjectURL(compressed));
     };
@@ -240,20 +181,6 @@ export default function SkillsIndex({
                                                     Hidden
                                                 </span>
                                             )}
-                                        </div>
-
-                                        <div className="mt-2 flex items-center gap-2">
-                                            <div className="h-1.5 w-32 overflow-hidden rounded-full bg-white/10">
-                                                <div
-                                                    className="h-full rounded-full bg-orange-500"
-                                                    style={{
-                                                        width: `${skill.proficiency ?? 0}%`,
-                                                    }}
-                                                />
-                                            </div>
-                                            <span className="text-[10px] text-gray-500">
-                                                {skill.proficiency ?? 0}%
-                                            </span>
                                         </div>
                                     </div>
 

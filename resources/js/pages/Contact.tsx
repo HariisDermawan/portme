@@ -1,5 +1,6 @@
 import type { FormEvent } from 'react';
 import { useForm, usePage } from '@inertiajs/react';
+import BackgroundDots from '@/components/BackgroundDots';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Reveal from '@/components/Reveal';
@@ -85,37 +86,7 @@ export default function Contact({
 
             <main className="relative min-h-screen overflow-hidden bg-[#0b0b0b] px-6 pt-32 pb-24 md:px-10 md:pt-40 md:pb-28 lg:px-16">
                 {/* Background dots */}
-                <div className="pointer-events-none absolute top-0 -right-24 h-[650px] w-[650px] opacity-35 sm:-right-10 md:right-0 md:opacity-50">
-                    <div
-                        className="absolute inset-0 md:hidden"
-                        style={{
-                            backgroundImage:
-                                'radial-gradient(circle, rgba(249,115,22,0.4) 1px, transparent 1.2px)',
-                            backgroundSize: '18px 18px',
-                            clipPath:
-                                'path("M 650 0 L 650 650 C 500 620 420 550 330 430 C 240 310 130 220 0 200 L 0 0 Z")',
-                            maskImage:
-                                'linear-gradient(to left, black 0%, black 65%, transparent 100%)',
-                            WebkitMaskImage:
-                                'linear-gradient(to left, black 0%, black 65%, transparent 100%)',
-                        }}
-                    />
-
-                    <div
-                        className="absolute inset-0 hidden md:block"
-                        style={{
-                            backgroundImage:
-                                'radial-gradient(circle, rgba(249,115,22,0.85) 1.4px, transparent 1.5px)',
-                            backgroundSize: '16px 16px',
-                            clipPath:
-                                'path("M 650 0 L 650 650 C 500 620 420 550 330 430 C 240 310 130 220 0 200 L 0 0 Z")',
-                            maskImage:
-                                'linear-gradient(to left, black 0%, black 65%, transparent 100%)',
-                            WebkitMaskImage:
-                                'linear-gradient(to left, black 0%, black 65%, transparent 100%)',
-                        }}
-                    />
-                </div>
+                <BackgroundDots />
 
                 <div className="relative z-10 mx-auto max-w-7xl">
                     {/* Heading */}

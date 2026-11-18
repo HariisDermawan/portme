@@ -105,7 +105,6 @@ class SkillController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'category' => ['required', 'string', 'max:255'],
             'icon' => ['nullable', 'string', 'max:255'],
-            'proficiency' => ['nullable', 'integer', 'between:0,100'],
             'is_visible' => ['boolean'],
             'sort_order' => ['integer', 'min:0'],
         ]);

@@ -8,7 +8,8 @@ import {
     dangerButton,
     formatDateTime,
 } from '../components/ui';
-import type { ActivityLog, ActivityLogStats, Paginated } from '../types';
+import type { ActivityLog } from '../types';
+import type { Paginated } from '@/types/pagination';
 
 function describeDevice(userAgent: string | null): string {
     if (!userAgent) {
@@ -46,7 +47,6 @@ export default function ActivityLogIndex({
     logs,
 }: {
     logs: Paginated<ActivityLog>;
-    stats: ActivityLogStats;
 }) {
     const previousPage = logs.links[0]?.url;
     const nextPage = logs.links[logs.links.length - 1]?.url;

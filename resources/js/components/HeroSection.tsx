@@ -1,6 +1,5 @@
-import { FaGithub, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
-import type { IconType } from 'react-icons';
 import Reveal from '@/components/Reveal';
+import { getSocialLinks } from '@/lib/socials';
 import type { PublicProfile } from '@/types/public';
 
 export default function HeroSection({
@@ -17,22 +16,7 @@ export default function HeroSection({
         'Saya seorang Web Developer yang memiliki ketertarikan dalam pengembangan website modern, mulai dari frontend hingga backend. Saya senang membangun aplikasi web yang fungsional, responsif, dan mudah digunakan.';
     const photo = profile?.photo ?? '/assets/me1.png';
 
-    const socials: { icon: IconType; href: string; label: string }[] = [
-        {
-            icon: FaInstagram,
-            href: profile?.instagram_url,
-            label: 'Instagram',
-        },
-        { icon: FaGithub, href: profile?.github_url, label: 'Github' },
-        {
-            icon: FaLinkedinIn,
-            href: profile?.linkedin_url,
-            label: 'LinkedIn',
-        },
-    ].filter(
-        (social): social is { icon: IconType; href: string; label: string } =>
-            Boolean(social.href),
-    );
+    const socials = getSocialLinks(profile);
 
     return (
         <section

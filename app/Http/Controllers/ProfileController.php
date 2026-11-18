@@ -31,7 +31,6 @@ class ProfileController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'profession' => ['nullable', 'string', 'max:255'],
             'photo' => ['nullable', 'image', 'max:4096'],
-            'about_photo' => ['nullable', 'image', 'max:4096'],
             'email' => ['nullable', 'email', 'max:255'],
             'phone' => ['nullable', 'string', 'max:30'],
             'location' => ['nullable', 'string', 'max:255'],
@@ -50,14 +49,6 @@ class ProfileController extends Controller
             );
         } else {
             unset($validated['photo']);
-        }
-
-        if ($request->hasFile('about_photo')) {
-            $validated['about_photo'] = Storage::disk('public')->url(
-                $request->file('about_photo')->store('profile', 'public'),
-            );
-        } else {
-            unset($validated['about_photo']);
         }
 
         $profile->fill($validated)->save();

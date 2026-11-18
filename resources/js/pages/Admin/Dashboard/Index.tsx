@@ -12,6 +12,8 @@ import AdminLayout from '../components/AdminLayout';
 import { EmptyState, PanelHeader, formatDate } from '../components/ui';
 import type { Message, Project, Stats } from '../types';
 
+type RecentProject = Pick<Project, 'id' | 'title' | 'category' | 'created_at'>;
+
 export default function DashboardIndex({
     stats,
     recentMessages,
@@ -19,7 +21,7 @@ export default function DashboardIndex({
 }: {
     stats: Stats;
     recentMessages: Message[];
-    recentProjects: Project[];
+    recentProjects: RecentProject[];
 }) {
     const { auth } = usePage().props;
 

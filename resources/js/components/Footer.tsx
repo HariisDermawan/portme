@@ -1,12 +1,7 @@
-import {
-    FaGithub,
-    FaInstagram,
-    FaLinkedinIn,
-    FaArrowUp,
-    FaEnvelope,
-} from 'react-icons/fa';
-import type { IconType } from 'react-icons';
+import { Link } from '@inertiajs/react';
+import { FaArrowUp, FaEnvelope } from 'react-icons/fa';
 import Reveal from '@/components/Reveal';
+import { getSocialLinks } from '@/lib/socials';
 import type { PublicProfile } from '@/types/public';
 
 const navLinks = [
@@ -27,27 +22,20 @@ export default function Footer({
         profile?.short_description ??
         'Freelance Web Developer yang berfokus pada pengembangan website modern, responsif, dan fungsional.';
 
-    const socialLinks: { icon: IconType; href: string; label: string }[] = [
-        { icon: FaInstagram, href: profile?.instagram_url, label: 'Instagram' },
-        { icon: FaGithub, href: profile?.github_url, label: 'Github' },
-        { icon: FaLinkedinIn, href: profile?.linkedin_url, label: 'LinkedIn' },
-    ].filter(
-        (social): social is { icon: IconType; href: string; label: string } =>
-            Boolean(social.href),
-    );
+    const socialLinks = getSocialLinks(profile);
 
     return (
         <footer className="border-t border-white/10 bg-[#0b0b0b] px-6 pt-16 md:px-10 lg:px-16">
             <div className="mx-auto max-w-7xl">
                 <div className="grid grid-cols-1 gap-12 pb-14 md:grid-cols-2 lg:grid-cols-3">
                     <Reveal>
-                        <a
+                        <Link
                             href="/"
                             className="font-heading text-2xl font-extrabold tracking-tight text-white"
                         >
                             {brand}
                             <span className="text-orange-500">.</span>
-                        </a>
+                        </Link>
 
                         <p className="mt-5 max-w-sm text-sm leading-7 text-gray-400">
                             {description}
@@ -79,12 +67,12 @@ export default function Footer({
                         <ul className="mt-6 space-y-4">
                             {navLinks.map((link) => (
                                 <li key={link.label}>
-                                    <a
+                                    <Link
                                         href={link.href}
                                         className="text-sm text-gray-400 transition hover:text-orange-500"
                                     >
                                         {link.label}
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -116,13 +104,16 @@ export default function Footer({
                         reserved.
                     </p>
 
-                    <a
-                        href="#home"
+                    <button
+                        type="button"
+                        onClick={() =>
+                            window.scrollTo({ top: 0, behavior: 'smooth' })
+                        }
                         aria-label="Back to top"
                         className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-gray-400 transition hover:border-orange-500 hover:bg-orange-500 hover:text-white"
                     >
                         <FaArrowUp size={15} />
-                    </a>
+                    </button>
                 </Reveal>
             </div>
         </footer>
