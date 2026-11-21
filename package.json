@@ -3,7 +3,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vp build",
+        "build": "vp build && node --input-type=module -e \"import { cpSync } from 'node:fs'; cpSync('public/build', 'dist', { recursive: true, force: true })\"",
         "build:ssr": "vp build && vp build --ssr",
         "dev": "vp dev",
         "check": "vp check",
