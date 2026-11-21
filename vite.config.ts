@@ -1,4 +1,3 @@
-
 import inertia from '@inertiajs/vite';
 import { wayfinder } from '@laravel/vite-plugin-wayfinder';
 import babel from '@rolldown/plugin-babel';
@@ -6,7 +5,12 @@ import tailwindcss from '@tailwindcss/vite';
 import react, { reactCompilerPreset } from '@vitejs/plugin-react';
 import laravel from 'laravel-vite-plugin';
 import { bunny } from 'laravel-vite-plugin/fonts';
+import { spawnSync } from 'node:child_process';
 import { defineConfig, lazyPlugins } from 'vite-plus';
+
+const isCiOrVercel = Boolean(process.env.VERCEL || process.env.CI);
+const hasPhp =
+    !isCiOrVercel && spawnSync('php', ['-v'], { stdio: 'ignore' }).status === 0;
 
 export default defineConfig(({ command }) => ({
     plugins: lazyPlugins(() => [
@@ -29,7 +33,7 @@ export default defineConfig(({ command }) => ({
         }),
         tailwindcss(),
 
-        ...(command === 'serve'
+        ...(command === 'serve' && hasPhp
             ? [
                   wayfinder({
                       formVariants: true,
@@ -76,7 +80,10 @@ export default defineConfig(({ command }) => ({
         ignorePatterns: [
             '.github/**',
             'composer.json',
+            'resources/js/actions/**',
             'resources/js/components/ui/*',
+            'resources/js/routes/**',
+            'resources/js/wayfinder/**',
             'resources/views/mail/*',
         ],
         sortTailwindcss: {
