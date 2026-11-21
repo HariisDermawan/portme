@@ -9,7 +9,9 @@ import { bunny } from 'laravel-vite-plugin/fonts';
 import { defineConfig, lazyPlugins } from 'vite-plus';
 
 export default defineConfig(({ command }) => ({
-    plugins: lazyPlugins(() => [
+    plugins: lazyPlugins(() => {
+        console.error('[debug] vite command =', command);
+        return [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.tsx'],
             refresh: true,
@@ -36,7 +38,8 @@ export default defineConfig(({ command }) => ({
                   }),
               ]
             : []),
-    ]),
+        ];
+    }),
     server: {
         host: '127.0.0.1',
         watch: {
